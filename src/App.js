@@ -1,17 +1,24 @@
-import React from 'react';
-import Title from './components/Title/title';
-import Buttons from './components/Button/button'
+import React from "react";
+import Title from "./components/Title/title";
+import Buttons from "./components/Button/button";
+import Livres from "./containers/Livres/livres";
 
 function App() {
   return (
     <div className="container">
-    <Title>Tous nos livres!</Title>
-    <div>les livres</div>
-    <Buttons btnType="btn-success" clic={()=>{console.log('ajout')}}>Ajouter</Buttons>
-    <Buttons btnType="btn-warning" clic={()=>{console.log('modife')}}>Modifier</Buttons>
-    <Buttons btnType="btn-danger" clic={()=>{console.log('supprime')}}>Supprimer</Buttons>
+      <Title>Tous nos livres!</Title>
+      <Livres />
+      <Buttons
+        css="w-100"
+        btnType="btn-success"
+        clic={() => {
+          console.log("ajout");
+        }}
+      >
+        Ajouter
+      </Buttons>
     </div>
-  )
+  );
 }
 
 export default App;
