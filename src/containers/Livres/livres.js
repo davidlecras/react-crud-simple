@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Button from "../../components/Button/button";
+import Livre from "./Livre/livre";
 
 class Books extends Component {
   state = {
@@ -29,29 +29,11 @@ class Books extends Component {
           {this.state.livres.map((livre) => {
             return (
               <tr key={livre.id}>
-                <td>{livre.title}</td>
-                <td>{livre.autor}</td>
-                <td>{livre.pages}</td>
-                <td>
-                  <Button
-                    btnType="btn-warning"
-                    clic={() => {
-                      console.log("modifier");
-                    }}
-                  >
-                    Modifier
-                  </Button>
-                </td>
-                <td>
-                  <Button
-                    btnType="btn-danger"
-                    clic={() => {
-                      console.log("supprimer");
-                    }}
-                  >
-                    supprimer
-                  </Button>
-                </td>
+              <Livre
+                title={livre.title}
+                autor={livre.autor}
+                pages={livre.pages}
+              />
               </tr>
             );
           })}
