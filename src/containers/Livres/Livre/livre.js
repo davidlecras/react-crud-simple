@@ -20,9 +20,7 @@ const livre=(props)=>{
     <td>
       <Button
         btnType="btn-danger"
-        clic={() => {
-          console.log("supprimer");
-        }}
+        clic={props.supprimer}
       >
         supprimer
       </Button>

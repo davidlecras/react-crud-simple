@@ -14,6 +14,15 @@ class Books extends Component {
       { id: 3, title: "JS pour les nuls", autor: "El barto", pages: 50 },
     ],
   };
+
+  bookSuppHandler = (id) => {
+    const livreIndexTab = this.state.livres.findIndex((element) => {
+      return element.id === id;
+    });
+    const newTabLivres=[...this.state.livres]
+    newTabLivres.splice(livreIndexTab,1);
+    this.setState({livres:newTabLivres});
+  };
   render() {
     return (
       <table className="table text-center">
@@ -29,11 +38,12 @@ class Books extends Component {
           {this.state.livres.map((livre) => {
             return (
               <tr key={livre.id}>
-              <Livre
-                title={livre.title}
-                autor={livre.autor}
-                pages={livre.pages}
-              />
+                <Livre
+                  title={livre.title}
+                  autor={livre.autor}
+                  pages={livre.pages}
+                  supprimer={() => this.bookSuppHandler(livre.id)}
+                />
               </tr>
             );
           })}
