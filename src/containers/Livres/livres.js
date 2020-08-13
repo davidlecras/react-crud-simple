@@ -20,38 +20,46 @@ class Books extends Component {
     const livreIndexTab = this.state.livres.findIndex((element) => {
       return element.id === id;
     });
-    const newTabLivres=[...this.state.livres]
-    newTabLivres.splice(livreIndexTab,1);
-    this.setState({livres:newTabLivres});
+    const newTabLivres = [...this.state.livres];
+    newTabLivres.splice(livreIndexTab, 1);
+    this.setState({ livres: newTabLivres });
+  };
+
+  bookAddHandler = (title, autor, pages) => {
+    console.log(title);
+    console.log(autor);
+    console.log(pages);
   };
   render() {
     return (
       <>
-      <table className="table text-center">
-        <thead>
-          <tr className="table-dark">
-            <th>Titres</th>
-            <th>Auteurs</th>
-            <th>Nombres de pages</th>
-            <th colSpan="2">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {this.state.livres.map((livre) => {
-            return (
-              <tr key={livre.id}>
-                <Livre
-                  title={livre.title}
-                  autor={livre.autor}
-                  pages={livre.pages}
-                  supprimer={() => this.bookSuppHandler(livre.id)}
-                />
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-      {this.props.ajoutLivre && <AddNewBook/>}
+        <table className="table text-center">
+          <thead>
+            <tr className="table-dark">
+              <th>Titres</th>
+              <th>Auteurs</th>
+              <th>Nombres de pages</th>
+              <th colSpan="2">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.livres.map((livre) => {
+              return (
+                <tr key={livre.id}>
+                  <Livre
+                    title={livre.title}
+                    autor={livre.autor}
+                    pages={livre.pages}
+                    supprimer={() => this.bookSuppHandler(livre.id)}
+                  />
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+        {this.props.ajoutLivre && (
+          <AddNewBook validating={this.bookAddHandler} />
+        )}
       </>
     );
   }
