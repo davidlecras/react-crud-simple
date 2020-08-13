@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import AddNewBook from "./AddNewBook/addNewBook";
 import Livre from "./Livre/livre";
 
 class Books extends Component {
@@ -25,6 +26,7 @@ class Books extends Component {
   };
   render() {
     return (
+      <>
       <table className="table text-center">
         <thead>
           <tr className="table-dark">
@@ -49,6 +51,8 @@ class Books extends Component {
           })}
         </tbody>
       </table>
+      {this.props.ajoutLivre && <AddNewBook/>}
+      </>
     );
   }
 }

@@ -16,7 +16,7 @@ class App extends Component {
     return (
       <div className="container">
         <Title>Tous nos livres!</Title>
-        <Livres />
+        <Livres ajoutLivre={this.state.buttonAddBook}/>
         <Buttons css="w-100" btnType="btn-success" clic={this.AddBookHandler}>
           {!this.state.buttonAddBook ? "Ajouter" : "Fermer l'ajout"}
         </Buttons>
