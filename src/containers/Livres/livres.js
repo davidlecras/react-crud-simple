@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import AddNewBook from "./AddNewBook/addNewBook";
 import ModifBook from "./ModifyBook/modifyBook";
 import Livre from "./Livre/livre";
+import Alert from "../../components/Alert/alert";
 
 class Books extends Component {
   state = {
@@ -17,6 +18,7 @@ class Books extends Component {
     ],
     LastIdBook: 3,
     bookToModify: 0,
+    alertMessage: null
   };
 
   bookSuppHandler = (id) => {
@@ -25,7 +27,10 @@ class Books extends Component {
     });
     const newTabLivres = [...this.state.livres];
     newTabLivres.splice(livreIndexTab, 1);
-    this.setState({ livres: newTabLivres });
+    this.setState({ 
+      livres: newTabLivres,
+      alertMessage: "Livre supprimé avec succès"
+    });
   };
 
   bookAddHandler = (title, autor, pages) => {
@@ -40,6 +45,7 @@ class Books extends Component {
     this.setState((oldState) => {
       return {
         livres: newTabLivres,
+        alertMessage: "Livre ajouté avec succès",
         LastIdBook: oldState.LastIdBook + 1,
       };
     });
@@ -55,12 +61,14 @@ class Books extends Component {
     newTabLivres[bookId]= newBook
     this.setState({
       livres: newTabLivres,
-      bookToModify: 0
+      bookToModify: 0,
+      alertMessage: "Livre modifié avec succès"
     })
   };
   render() {
     return (
       <>
+      {this.state.alertMessage && <Alert>{this.state.alertMessage}</Alert>}
         <table className="table text-center">
           <thead>
             <tr className="table-dark">
