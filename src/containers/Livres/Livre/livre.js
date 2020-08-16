@@ -10,9 +10,7 @@ const livre=(props)=>{
     <td>
       <Button
         btnType="btn-warning"
-        clic={() => {
-          console.log("modifier");
-        }}
+        clic={props.modifier}
       >
         Modifier
       </Button>

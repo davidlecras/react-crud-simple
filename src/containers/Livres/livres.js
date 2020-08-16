@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import AddNewBook from "./AddNewBook/addNewBook";
+import ModifBook from "./ModifyBook/modifyBook";
 import Livre from "./Livre/livre";
 
 class Books extends Component {
@@ -14,6 +15,8 @@ class Books extends Component {
       { id: 2, title: "Vive le code", autor: "Bill Gates", pages: 750 },
       { id: 3, title: "JS pour les nuls", autor: "El barto", pages: 50 },
     ],
+    LastIdBook: 3,
+    bookToModify: 0,
   };
 
   bookSuppHandler = (id) => {
@@ -26,9 +29,34 @@ class Books extends Component {
   };
 
   bookAddHandler = (title, autor, pages) => {
-    console.log(title);
-    console.log(autor);
-    console.log(pages);
+    const newBook = {
+      id: this.state.LastIdBook + 1,
+      title: title,
+      autor: autor,
+      pages: pages,
+    };
+    const newTabLivres = [...this.state.livres];
+    newTabLivres.push(newBook);
+    this.setState((oldState) => {
+      return {
+        livres: newTabLivres,
+        LastIdBook: oldState.LastIdBook + 1,
+      };
+    });
+    this.props.closeAddBook();
+  };
+
+  bookModificationHandler = (id, title, autor, pages) => {
+    const bookId= this.state.livres.findIndex(
+      b=>{return b.id === id}
+    );
+    const newBook = {id,title,autor,pages};
+    const newTabLivres = [...this.state.livres];
+    newTabLivres[bookId]= newBook
+    this.setState({
+      livres: newTabLivres,
+      bookToModify: 0
+    })
   };
   render() {
     return (
@@ -44,16 +72,32 @@ class Books extends Component {
           </thead>
           <tbody>
             {this.state.livres.map((livre) => {
-              return (
-                <tr key={livre.id}>
-                  <Livre
-                    title={livre.title}
-                    autor={livre.autor}
-                    pages={livre.pages}
-                    supprimer={() => this.bookSuppHandler(livre.id)}
-                  />
-                </tr>
-              );
+              if (livre.id !== this.state.bookToModify) {
+                return (
+                  <tr key={livre.id}>
+                    <Livre
+                      title={livre.title}
+                      autor={livre.autor}
+                      pages={livre.pages}
+                      supprimer={() => this.bookSuppHandler(livre.id)}
+                      modifier={() => this.setState({ bookToModify: livre.id })}
+                    />
+                  </tr>
+                );
+              } else {
+                // Display inputs to modify selected book:
+                return (
+                  <tr key={livre.id}>
+                    <ModifBook
+                      id={livre.id}
+                      title={livre.title}
+                      autor={livre.autor}
+                      pages={livre.pages}
+                      validateModification={this.bookModificationHandler}
+                    />
+                  </tr>
+                );
+              }
             })}
           </tbody>
         </table>

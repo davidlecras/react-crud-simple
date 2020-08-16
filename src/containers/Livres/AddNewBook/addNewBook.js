@@ -17,6 +17,11 @@ class AddNewBook extends Component {
       this.state.autorFiled,
       this.state.pagesNumber
     );
+    this.setState({
+      titleFiled: "",
+      autorFiled: "",
+      pagesNumber: "",
+    })
   };
   render() {
     const monCss = `${classes.newForm}  p-2 mt-2 text-primary text-center`;
