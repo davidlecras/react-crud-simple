@@ -18,7 +18,10 @@ class Books extends Component {
     ],
     LastIdBook: 3,
     bookToModify: 0,
-    alertMessage: null
+    alertMessage:{
+      message: null,
+      alertType: null
+    }
   };
 
   bookSuppHandler = (id) => {
@@ -29,7 +32,10 @@ class Books extends Component {
     newTabLivres.splice(livreIndexTab, 1);
     this.setState({ 
       livres: newTabLivres,
-      alertMessage: "Livre supprimé avec succès"
+      alertMessage:{
+        message:"Livre supprimé avec succès",
+        alertType: "alert-danger"
+      } 
     });
   };
 
@@ -45,7 +51,10 @@ class Books extends Component {
     this.setState((oldState) => {
       return {
         livres: newTabLivres,
-        alertMessage: "Livre ajouté avec succès",
+        alertMessage:{
+          message:"Livre ajouté avec succès",
+          alertType: "alert-success"
+        } ,
         LastIdBook: oldState.LastIdBook + 1,
       };
     });
@@ -62,13 +71,17 @@ class Books extends Component {
     this.setState({
       livres: newTabLivres,
       bookToModify: 0,
-      alertMessage: "Livre modifié avec succès"
+      alertMessage:{
+        message:"Livre modifié avec succès",
+        alertType: "alert-info"
+      }
+      
     })
   };
   render() {
     return (
       <>
-      {this.state.alertMessage && <Alert>{this.state.alertMessage}</Alert>}
+      {this.state.alertMessage && <Alert alertType={this.state.alertMessage.alertType}>{this.state.alertMessage.message}</Alert>}
         <table className="table text-center">
           <thead>
             <tr className="table-dark">

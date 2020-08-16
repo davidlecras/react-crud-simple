@@ -1,8 +1,9 @@
 import React from 'react';
 
 const alert=(props)=>{
+  const classAlertType=`alert text-center ${props.alertType}`
   return(
-    <div className="alert alert-success text-center" role="alert">
+    <div className={classAlertType} role="alert">
   {props.children}
 </div>
   )
